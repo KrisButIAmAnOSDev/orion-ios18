@@ -10,8 +10,7 @@ jobs:
     # needed to be able to create a Release
     permissions:
       contents: write
-    # We need to use an old runner for Xcode 11.7
-    runs-on: macos-11
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v4
       with:
@@ -33,10 +32,8 @@ jobs:
     - name: Build Release
       run: |
         cd orion
-        # Orion doesnt build with 12.5 atm due to a compiler bug (SR-14535)
-        DEVELOPER_DIR=/Applications/Xcode_12.4.app/Contents/Developer make clean package FINALPACKAGE=1
-        DEVELOPER_DIR=/Applications/Xcode_12.4.app/Contents/Developer make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
-        DEVELOPER_DIR=/Applications/Xcode_11.7.app/Contents/Developer make clean package FINALPACKAGE=1
+        make clean package FINALPACKAGE=1
+        make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
         cd packages
         zip -yr9 Orion_${{ steps.setup.outputs.version }}.zip *
     - name: Create Release
