@@ -8,7 +8,6 @@ ifneq ($(THEOS_PACKAGE_SCHEME),rootless)
 Orion_XCODEFLAGS = LD_DYLIB_INSTALL_NAME=/Library/Frameworks/Orion.framework/Orion
 endif
 Orion_XCODEFLAGS += DWARF_DSYM_FOLDER_PATH=$(THEOS_OBJ_DIR)/dSYMs
-Orion_XCODEFLAGS += EXTRACT_API_AS_HEADER=NO ENABLE_EXTRACT_API=NO
 
 include $(THEOS_MAKE_PATH)/xcodeproj.mk
 
